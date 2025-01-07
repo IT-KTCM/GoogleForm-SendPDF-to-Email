@@ -35,7 +35,31 @@
 
 ## **การตั้งค่าตัวแปรในโค้ด**
 
-### **1. ตัวแปรสำหรับอีเมล**
+### **1. ตัวแปรทั่วไปสำหรับการตั้งค่า**
+```javascript
+let templateSlideId = '1wt42EkRnzplmjSV71E-R0FHVkWN69xJ2Xml5w0IzKuk'; 
+let folderResponsePdfId = '1CjbQ9CpNdcPRWGGu5pFkQlN2fpCJDtrm'; 
+let folderResponseSlideId = '1TB0iSwhlarG93besbpb9c7pxH3PtgIYR'; 
+let sheetName = 'การตอบแบบฟอร์ม 1'; 
+let pdf_file_name = "รายงานการประเมินการนิเทศฝึกงาน"; 
+let isSendEmail = true; 
+let isSendLine = false; 
+let email_send_default = ['dvt2563ktcm@gmail.com']; 
+var email_subject = 'ขอบคุณสำหรับการประเมินการนิเทศฝึกงาน'; 
+var email_message = 'แบบฟอร์มการประเมินการนิเทศฝึกงานได้จัดส่งให้ท่านแล้ว'; 
+```
+- `templateSlideId`: รหัส (ID) ของ Google Slides Template ที่ใช้เป็นแม่แบบ
+- `folderResponsePdfId`: รหัส (ID) ของโฟลเดอร์ที่ใช้เก็บไฟล์ PDF
+- `folderResponseSlideId`: รหัส (ID) ของโฟลเดอร์ที่ใช้เก็บ Google Slides ที่สร้างใหม่
+- `sheetName`: ชื่อ Google Sheet ที่เก็บข้อมูลจาก Google Form
+- `pdf_file_name`: ชื่อไฟล์ PDF ที่จะถูกสร้างขึ้น
+- `isSendEmail`: กำหนดว่าระบบจะส่งอีเมลหรือไม่ (ค่า `true` หมายถึงส่ง, `false` หมายถึงไม่ส่ง)
+- `isSendLine`: กำหนดว่าระบบจะส่ง LINE Notify หรือไม่ (ค่า `true` หมายถึงส่ง, `false` หมายถึงไม่ส่ง)
+- `email_send_default`: อีเมลเริ่มต้นสำหรับส่ง PDF หากไม่ได้ระบุในแบบฟอร์ม
+- `email_subject`: หัวข้ออีเมลที่ตอบกลับผู้ใช้งาน
+- `email_message`: เนื้อหาอีเมลที่ตอบกลับผู้ใช้งาน
+
+### **2. ตัวแปรสำหรับอีเมล**
 ```javascript
 let colEmail = index_col["อีเมล"];
 let colEmailStatus = index_col["send_email_status"] || "";
@@ -45,17 +69,17 @@ let colEmailStatusName = "AC";
 - `colEmailStatus`: คอลัมน์ที่เก็บสถานะการส่งอีเมล (`SENT` หากส่งสำเร็จ)
 - `colEmailStatusName`: ชื่อคอลัมน์ใน Google Sheets (ค่าคงที่: `AC`)
 
-### **2. ตัวแปรสำหรับ LINE Notify**
+### **3. ตัวแปรสำหรับ LINE Notify**
 ```javascript
 let colLineStatus = index_col["send_line_status"] || "";
 let colLineStatusName = "O";
-let tokensV2 = [''];  // เพิ่ม Token ที่นี่
+let tokensV2 = [''];  
 ```
 - `colLineStatus`: คอลัมน์ที่เก็บสถานะการส่งข้อความ LINE Notify
 - `colLineStatusName`: ชื่อคอลัมน์ใน Google Sheets (ค่าคงที่: `O`)
 - `tokensV2`: เก็บ LINE Token สำหรับส่งข้อความผ่าน LINE Notify
 
-### **3. ตัวแปรสำหรับไฟล์ PDF**
+### **4. ตัวแปรสำหรับไฟล์ PDF**
 ```javascript
 let colName = index_col["ชื่อสถานประกอบการ"] + "_" + index_col["ครูนิเทศ"] || "";
 let colPdfStatus = index_col["create_pdf_status"] || "";
@@ -65,7 +89,7 @@ let colPdfStatusName = "AB";
 - `colPdfStatus`: คอลัมน์ที่เก็บสถานะการสร้าง PDF
 - `colPdfStatusName`: ชื่อคอลัมน์ใน Google Sheets (ค่าคงที่: `AB`)
 
-### **4. ตัวแปรสำหรับรูปภาพ**
+### **5. ตัวแปรสำหรับรูปภาพ**
 ```javascript
 let colAllImage = [
   { [index_col['รูปภาพการนิเทศ1']]: '{{รูปภาพการนิเทศ1}}' },
@@ -74,7 +98,7 @@ let colAllImage = [
 ```
 - `colAllImage`: กำหนดคอลัมน์รูปภาพใน Google Sheets และ Placeholder ใน Google Slides เช่น `รูปภาพการนิเทศ1` จะแทนที่ `{{รูปภาพการนิเทศ1}}`
 
-### **5. ตัวแปรสำหรับ Checkbox**
+### **6. ตัวแปรสำหรับ Checkbox**
 ```javascript
 let index_col_checkbox = [];
 let index_col_multi_checkbox = [];
